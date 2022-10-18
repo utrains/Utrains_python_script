@@ -1,4 +1,4 @@
-## At work , there is a need to a python script that can convert .xml files to json format. To execute this script, we took "test.xml" file as an example. We can get this file from the current directory
+## At work , there is a need to a python script that can convert .xml files to json format. To execute this script, we took "test.xml" file as an example. We can get that file from the current directory
 
 ### The script is below:
 
