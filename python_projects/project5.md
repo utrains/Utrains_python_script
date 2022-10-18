@@ -23,7 +23,7 @@ with open("test.xml") as xml_file:
 	json_data = json.dumps(data_dict)
 	
 	# Write the json data to output json file called output
-	with open("output.json", "w") as json_file:
+	with open("xml_converted.json", "w") as json_file:
 		json_file.write(json_data)
 		json_file.close()
 
