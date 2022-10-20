@@ -1,4 +1,4 @@
-##  we have a script that we use to generate QR codes. It needs two input the message/url and the file name for the qr code.
+##  At work, we need to write a script that generate QR codes. It needs two input the message/url and the file name for the qr code.
 
 #### To execute this script, you have to install "pyqrcode" and "pypng" modules with the following commands:
 ```pip install pyqrcode``` or ```pip3 install pyqrcode```
