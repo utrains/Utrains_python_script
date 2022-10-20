@@ -1,5 +1,4 @@
-## At work , you are facing difficulties when working with json files on urgent projet. But you are more comfortable with csv files, so you need to write a python script to convert json files to csv format. To execute this script, we took the output file of project5 named "xml_converted.json" and convert it into csv format.
-
+## At work , there is a tool to generate synthetic data.The data generated is in json format and needs to be transform into csv format for a specific team. write a python script that can take json file and construct a csv file from it.
 ### The script is below:
 
 ```
@@ -15,11 +14,12 @@ from os import sep
 # Opening JSON file and loading the data
 # into the variable data
 with open('xml_converted.json') as json_file:
-	data = json.load(json_file)
+	data = json.load(json_file)    ## Create a dict called data with the json content
 
+# 
 catalog_book = data['catalog']['book']
 
-# now we will open a file for writing
+# now we will open a csv file for writing
 data_file = open('json_converted.csv', 'w')
 
 # create the csv writer object
