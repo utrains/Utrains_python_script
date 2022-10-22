@@ -2,7 +2,7 @@
 
 ### the script is below:
 
-```
+```python
 import pyqrcode
 import png
 from pyqrcode import QRCode
