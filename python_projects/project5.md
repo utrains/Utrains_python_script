@@ -2,7 +2,7 @@
 
 ### The script is below:
 
-```
+```python
 # install json and xmltodict modules if you don't have it yet
 # import json module and xmltodict module provided by python
 
