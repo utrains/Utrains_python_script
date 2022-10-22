@@ -4,7 +4,7 @@
 
 Before executing the below script, you have to set Database credentials, AWS Access key credentials and backup path.
 
-```
+```python
 import os
 import sys
 import subprocess
