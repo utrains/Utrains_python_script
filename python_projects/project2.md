@@ -1,6 +1,6 @@
 ## The dev team is using a script to inventory instance infos from aws using the boto3 module. (the script is querying all instances with tag {environment: dev } this value is hard coded in the script. please modify the script so the qa team and eventually the subsequent team can use it to do the same.
 
-```
+```python
 #!/usr/bin/python
 '''
 This script starts all instances with a specific tag.
