@@ -2,7 +2,8 @@
 
 ### The script is below:
 
-```#Program to fetch the http status code give the url/api
+```python
+#Program to fetch the http status code give the url/api
 from urllib.request import urlopen
 from urllib.error import URLError, HTTPError
 import emoji
