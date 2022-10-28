@@ -1,4 +1,4 @@
-## At work , there is a tool to generate synthetic data.The data generated is in json format and needs to be transform into csv format for a specific team. write a python script that can take json file and construct a csv file from it. Let's work the json file called "xml_converted.json" as example. 
+## At work , there is a tool to generate synthetic data.The data generated is in json format and needs to be transform into csv format for a specific team. write a python script that can take json file and construct a csv file from it. Let's work with the json file called "xml_converted.json" as example. 
 ### The script is below:
 
 ```python
