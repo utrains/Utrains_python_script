@@ -11,7 +11,7 @@ def create_iam_user(username):
 
 #create_iam_user('utrains')
 
-# get a list of all users of AWS account
+# get a list of all IAM users
 def list_users():
     iam_client = boto3.client("iam")
     paginator = iam_client.get_paginator('list_users')
