@@ -1,7 +1,8 @@
 #!/bin/python
 import boto3
 
-ec2_client=boto3.client("ec2")
+AWS_REGION="<SET YOUR REGION>"
+ec2_client=boto3.client("ec2", region_name=AWS_REGION)
 list_volumes_ids=[]
 
 filter_avail={'Name':'status', 'Values': ['available']}
@@ -12,7 +13,6 @@ for page in paginator.paginate(Filters=[filter_avail]):
         list_volumes_ids.append(each_vol['VolumeId'])
 
 print(f"The volumes Ids are: {list_volumes_ids}")
-
 # create a snapshot for each available volume
 snapshots_ids=[]
 for vol_id in list_volumes_ids:
