@@ -19,12 +19,13 @@ def list_uncorrect_users():
     for users in _iam_users:
         mfa =_iam.list_mfa_devices(UserName=users)
         users_tags= _iam.list_user_tags(UserName=users)
+        email_tag = list(filter(lambda tag: tag['Key'] == 'email', users_tags['Tags']))
         try:
             user_profile=_iam.get_login_profile(UserName=users)
             user_profile_date=user_profile['LoginProfile']['CreateDate']
             #print(users, user_profile_date)
         except ClientError as e:
-            if (len(mfa['MFADevices'])==0) and (len(users_tags['Tags'])==0):
+            if (len(mfa['MFADevices'])==0) and (len(email_tag)==0):
                 _uncorrect_users.append(users)
                 print(users)
                 #print(mfa['MFADevices'])
