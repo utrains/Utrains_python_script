@@ -81,6 +81,18 @@ else:
 
 Write a function that will take two integers and give the sum of those two int.
 
+
+### Solution:
+``` python
+
+_integer1 = int(input("Enter your first integer: "))
+_integer2 = int(input("Enter your second integer: "))
+
+_sum = _integer1 + _integer2
+  
+print("The sum of  those two integers is: ", _sum)
+```
+
 ## Exercise 7:
 
 Write a program to inventory the linux system.
