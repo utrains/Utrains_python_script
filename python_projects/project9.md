@@ -1,4 +1,4 @@
-## The script in project8 is running locally, Configure it to run periodically (every week)  with lamda function and email the security team with any findings.
+## The script in project8 is running locally, Configure it to run periodically (every week)  with lambda function and email the security team with any findings.
 
 ## The script is below:
 
@@ -7,7 +7,7 @@ import boto3
 import json
 from botocore.exceptions import ClientError
 
-def lamda_handler(event, context):
+def lambda_handler(event, context):
     s3_client = boto3.client('s3')
 
     buckets_list = s3_client.list_buckets()
