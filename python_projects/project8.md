@@ -1,4 +1,4 @@
-## After finding the s3 buckets that don't have encryption enabled and no bucket policy applied using projectè script, modify the script to fix them accordingly.
+## After finding the s3 buckets that don't have encryption enabled and no bucket policy applied based on project7's script, modify that to fix them accordingly.
 
 
 ## The script is below:
