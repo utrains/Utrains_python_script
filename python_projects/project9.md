@@ -1,4 +1,4 @@
-## The script in project8 is running locally, Configure it to run periodically ( every week)  with lamda function and email the security team with any findings.
+## The script in project8 is running locally, Configure it to run periodically (every week)  with lamda function and email the security team with any findings.
 
 ## The script is below:
 
