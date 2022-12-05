@@ -3,7 +3,6 @@
 
 ## The script is below:
 
-### You need to set in the folowing script, the IAM_USER_ARN in the bucket_policy object.
 ``` python
 
 import boto3
