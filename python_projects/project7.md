@@ -12,7 +12,10 @@ s3_client = boto3.client('s3')
 
 buckets_list = s3_client.list_buckets()
 
-buckets = [bucket['Name'] for bucket in buckets_list['Buckets']]
+# get alist of bucket's names
+buckets = []
+for bucket in buckets_list['Buckets']:
+    buckets.append(bucket['Name'])
 
 def get_unencrypted_buckets():
     """ This function get a list of all s3 buckets without Encryption """
@@ -59,7 +62,7 @@ if unencrypted_buckets:
 else:
     print(f"\t \t All Buckets have encryption enable \n")
 
-print("\n ############# List of buckets with no encryption: ########### \n")
+print("\n ############# List of buckets without policy: ########### \n")
 
 if nopolicy_buckets:
     for bucket_name in nopolicy_buckets:
