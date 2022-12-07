@@ -12,7 +12,7 @@ s3_client = boto3.client('s3')
 
 buckets_list = s3_client.list_buckets()
 
-# get alist of bucket's names
+# get a list of bucket's names
 buckets = []
 for bucket in buckets_list['Buckets']:
     buckets.append(bucket['Name'])
