@@ -12,7 +12,10 @@ def lambda_handler(event, context):
 
     buckets_list = s3_client.list_buckets()
 
-    buckets = [bucket['Name'] for bucket in buckets_list['Buckets']]
+    # get a list of bucket's names
+    buckets = []
+    for bucket in buckets_list['Buckets']:
+        buckets.append(bucket['Name'])
 
     def get_EncryptedFixed_buckets():
         """ This function find all s3 buckets without Encryption and fixed them, 
@@ -98,7 +101,7 @@ def lambda_handler(event, context):
     else:
         print(f"\t \t All Buckets are  encrypted \n")
 
-    print("\n ############# List of buckets with no encryption fixed: ########### \n")
+    print("\n ############# List of buckets without policy fixed: ########### \n")
 
     if fixed_policy_buckets:
         for bucket_name in fixed_policy_buckets:
