@@ -41,6 +41,7 @@ def get_EncryptedFixed_buckets():
                         ]
                     }
                 )
+                print(f"Encryption fixed on {bucket}")
                 unencrypted_buckets_fixed.append(bucket)
             else:
                 print(f"Bucket: {bucket}, unexpected error for encryption check: {e}")
