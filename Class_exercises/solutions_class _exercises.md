@@ -151,19 +151,70 @@ for i in jobs_name:
 ```
 ## Exercise 10:
 
-During deployment, there is a need to check an end point. if the return code is 200, then 
+During deployment, there is a need to check an endpoint. If the return code is 200, then 
 we know it is a success. This is done manually by typing the endpoint on the browser.
 write a python code that will be integrated in the CD pipeline to check various endpoints automatically.
 you can use https://www.wikipedia.org/ for positive testing https://www.wikipedia.org/class for negative testing of your code.
 
-10-a) change the script to request url from users.
+### Solution
+``` python
+import requests
+
+response = requests.get('https://www.wikipedia.org/')
+
+_code = response.status_code
+
+if _code == 200:
+    print("endpoint up and running")
+else:
+    print("End point down!!")
+```
+10-a) Change the script to request url from users.
+
+### Solution
+```python
+import requests
+
+_url = input("Enter the endpoint to be checked: ")
+
+response = requests.get(_url)
+
+_code = response.status_code
+
+if _code == 200:
+    print("endpoint up and running")
+else:
+    print("End point down!!")
+```
 
 10-b) If a user enter a malformed url, the code breaks your task is to catch that exception and tell the user that the url is not good.
+
+### Solution
+```python
+import requests
+
+_url = input("Enter your url here: ")
+
+try:
+    response = requests.get(_url)
+    _code = response.status_code
+    if _code == 200:
+        print("endpoint up and running")
+    else: 
+        print("End point down!!")
+except:
+    print("Your Url is not good")
+```
 
 ## Exercise 11:
 
 In one of your projects, you need data from a specific team and they provided the data in xml format.
-you need the data in csv or json format so you can easyly load it into bigquery ( a big data service from google cloud)
-Write a script that can be used to transform xml file into csv or json format. (you can use https://www.mockaroo.com/ to generate synthetique data for texting)
+You need the data in csv or json format so you can easyly load it into bigquery (a big data service from google cloud)
+Write a script that can be used to transform xml file into csv or json format. (you can use https://www.mockaroo.com/ to generate synthetique data for testing).
 
+### Solution
+
+Use the following link with your xml file from mockaroo as input:
+
+https://github.com/utrains/Utrains_python_script/blob/main/python_projects/project5.md
 
