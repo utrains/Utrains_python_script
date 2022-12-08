@@ -26,5 +26,5 @@ with open("test.xml") as xml_file:
 	with open("xml_converted.json", "w") as json_file:
 		json_file.write(json_data)
 		json_file.close()
-
+xml_file.close()
 ```
