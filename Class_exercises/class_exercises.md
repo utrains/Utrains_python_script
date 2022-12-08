@@ -44,19 +44,19 @@ need a way to automate the jenkins server inventory.)
 
 ## Exercise 10:
 
-During deployment, there is a need to check an end point. if the return code is 200, then 
+During deployment, there is a need to check an endpoint. If the return code is 200, then 
 we know it is a success. This is done manually by typing the endpoint on the browser.
 write a python code that will be integrated in the CD pipeline to check various endpoints automatically.
 you can use https://www.wikipedia.org/ for positive testing https://www.wikipedia.org/class for negative testing of your code.
 
-10-a) change the script to request url from users.
+10-a) Change the script to request url from users.
 
 10-b) If a user enter a malformed url, the code breaks your task is to catch that exception and tell the user that the url is not good.
 
 ## Exercise 11:
 
 In one of your projects, you need data from a specific team and they provided the data in xml format.
-you need the data in csv or json format so you can easyly load it into bigquery ( a big data service from google cloud)
-Write a script that can be used to transform xml file into csv or json format. (you can use https://www.mockaroo.com/ to generate synthetique data for texting)
+You need the data in csv or json format so you can easyly load it into bigquery (a big data service from google cloud)
+Write a script that can be used to transform xml file into csv or json format. (you can use https://www.mockaroo.com/ to generate synthetique data for testing).
 
 
