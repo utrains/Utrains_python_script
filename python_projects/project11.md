@@ -31,12 +31,7 @@ def list_uncorrect_users():
                 #print(mfa['MFADevices'])
                 print("******************")
     print(_uncorrect_users)
-
-# run the script every day by 06:00 am for security purposes
-schedule.every().day.at("06:00").do(list_uncorrect_users)
-
-while True:
-    # run all pending scheduler
-    schedule.run_pending()
-    time.sleep(1)
-```
+    return _uncorrect_users
+    # delete uncorrect iam users
+    for user in list_uncorrect_users():
+        _iam.delete_user(UserName=user)
