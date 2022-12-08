@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     buckets = []
     for bucket in buckets_list['Buckets']:
         buckets.append(bucket['Name'])
-
+    AWS_REGION='ap-south-1'
     def get_EncryptedFixed_buckets():
         """ This function find all s3 buckets without Encryption and fixed them, 
         then return the list of fixed buckets """
@@ -39,6 +39,7 @@ def lambda_handler(event, context):
                             ]
                         }
                     )
+                    print(f"Encryption fixed on {bucket}")
                     unencrypted_buckets_fixed.append(bucket)
                 else:
                     print(f"Bucket: {bucket}, unexpected error for encryption check: {e}")
@@ -58,7 +59,7 @@ def lambda_handler(event, context):
                     "Resource": f"arn:aws:s3:::{bucket_name}/*",
                     "Principal": {
                         "AWS": [
-                            "<IAM_USER_ARN>",
+                            "<SET YOUR IAM_USER_ARN>",
                         ]
                     },
                 }
@@ -93,20 +94,48 @@ def lambda_handler(event, context):
 
     encrypted_buckets= get_EncryptedFixed_buckets()
     fixed_policy_buckets= get_NoPolicyFixed_buckets()
+    buckets_fixed=list(set(encrypted_buckets+fixed_policy_buckets))
 
-    print("\n ############# List of buckets with no encryption fixed: ########### \n")
-    if encrypted_buckets:
-        for bucket_name in encrypted_buckets:
-            print(f"\t \t Bucket: {bucket_name} \n")
+    def send_mail():
+        # set a verified email address of security team
+        RECIPIENT = ["<SET A VERIFIED EMAIL OF SECURITY TEAM>"]
+        # set your verified sender email address
+        SENDER = "<SET A VERIFIED SENDER EMAIL>"
+        SUBJECT = "Encryption and Policy fixed on S3 buckets"
+        BODY_TEXT = (f"""
+        Hello Security team, 
+        This mail is to you notify that, we have applied encryption and policy on all the buckets 
+        in the list below: 
+        {buckets_fixed}""")           
+        CHARSET = "UTF-8"
+        ses_client = boto3.client('ses')
+        try:
+            response = ses_client.send_email(
+                Destination={
+                    'ToAddresses': RECIPIENT,
+                },
+                Message={
+                    'Body': {
+                        'Text': {
+                            'Charset': CHARSET,
+                            'Data': BODY_TEXT,
+                        },
+                    },
+                    'Subject': {
+                        'Charset': CHARSET,
+                        'Data': SUBJECT,
+                    },
+                },
+                Source=SENDER,
+            )
+        except ClientError as e:
+            print(e.response['Error']['Message'])
+        else:
+            print(f"Email sent! Message ID: {response['MessageId']}")
+            
+    # send mail if buckets_fixed is not empty
+    if buckets_fixed:
+        send_mail()
     else:
-        print(f"\t \t All Buckets are  encrypted \n")
-
-    print("\n ############# List of buckets without policy fixed: ########### \n")
-
-    if fixed_policy_buckets:
-        for bucket_name in fixed_policy_buckets:
-            print(f"\t \t Bucket: {bucket_name} \n")
-    else:
-        print(f"\t \t All Buckets have policy \n")
-        
+        print("All the Buckets are good !!!")  
  ```
