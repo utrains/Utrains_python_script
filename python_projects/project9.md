@@ -2,6 +2,8 @@
 
 ## The script is below:
 
+### Attach policies for S3 and SES to the role of your lambda function.
+
 ``` python
 import boto3
 import json
