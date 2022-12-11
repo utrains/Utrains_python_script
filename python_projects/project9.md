@@ -2,7 +2,7 @@
 
 ## The script is below:
 
-### Attach policies for S3 and SES to the role of your lambda function.
+### Attach policies for S3 and SES to the role of your lambda function in AWS.
 
 ``` python
 import boto3
