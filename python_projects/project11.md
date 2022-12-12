@@ -32,6 +32,3 @@ def list_uncorrect_users():
                 print("******************")
     print(_uncorrect_users)
     return _uncorrect_users
-    # delete uncorrect iam users
-    for user in list_uncorrect_users():
-        _iam.delete_user(UserName=user)
