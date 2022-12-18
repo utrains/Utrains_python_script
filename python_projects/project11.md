@@ -1,4 +1,4 @@
-## Write a script that will check if all AWS users have been created correctly as far as password, MFA set up and tag. This script should run every day for security purposes.
+## Write a script that will check if all AWS users have been created correctly as far as password, MFA set up and tag. Then, delete uncorrect users and notify the security team by email. This script should run every day for security purposes.
 
 ## The script is below:
 
