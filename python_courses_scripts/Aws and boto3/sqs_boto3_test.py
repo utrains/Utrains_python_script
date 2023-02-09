@@ -53,16 +53,16 @@ def receive_message():
 #receive_message()
 
 # delete a message from the SQS queue
-#message= receive_message()["Messages"][0]
-#receipt_handle= message['ReceiptHandle']
-def delete_message(receipt_handle):
+def delete_message():
+    message= receive_message()["Messages"][0]
+    receipt_handle= message['ReceiptHandle']
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
     response = sqs_client.delete_message(
-        QueueUrl="https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue",
+        QueueUrl="https://ca-central-1.queue.amazonaws.com/076892551558/estephe-new-queue",
         ReceiptHandle=receipt_handle,
     )
     print(response)
-#delete_message(receipt_handle)
+#delete_message()
 
 # change DelaySeconds and VisibilityTimeout attributes of my-new-queue
 def change_queue_attributes():
