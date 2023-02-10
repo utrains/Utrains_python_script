@@ -12,14 +12,14 @@ def create_iam_user(username):
 #create_iam_user('utrains')
 
 # get a list of all IAM users
-def list_users():
+def list_iam_users():
     iam_client = boto3.client("iam")
     paginator = iam_client.get_paginator('list_users')
     for response in paginator.paginate():
         for user in response["Users"]:
             print(f"Username: {user['UserName']}, Arn: {user['Arn']}")
 
-#list_users()
+#list_iam_users()
 
 # update the name of IAM user
 def update_user(old_user_name, new_user_name):
