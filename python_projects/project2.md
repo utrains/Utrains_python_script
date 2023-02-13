@@ -8,6 +8,9 @@ This script starts all instances with a specific tag.
 
 import boto3
 
+#ec2_client=boto3.client('ec2')
+ec2_resource = boto3.resource('ec2')
+
 def instances_find(name, value):
     '''
     Finds instance id's based on tags.
