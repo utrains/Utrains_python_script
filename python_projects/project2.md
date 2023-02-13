@@ -42,24 +42,22 @@ def show_instances(instances):
         print(instance_details)
 
 
-def instances_start(list):
-    '''
-    Starts instances defined in the list.
-    '''
-    ec2_client.start_instances(InstanceIds=list)
+# def instances_start(list):
+    #'''
+    #Starts instances defined in the list.
+    #'''
+    # ec2_client.start_instances(InstanceIds=list)
 
 # enter tag name and value
 tag_name = 'tag:environment'
 tag_value = 'dev'
 
-ec2_resource = boto3.resource('ec2')
-ec2_client = boto3.client('ec2')
 
 # find instances
 ec2_list = instances_find(tag_name, tag_value)
-# start instances
-# ec2_stop = instances_start(ec2_list)
-#print('started instances: ' + str(ec2_list))
+
+
+#show instances
 show_instances(ec2_list)
 
 ```
