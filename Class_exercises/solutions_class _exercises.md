@@ -68,13 +68,17 @@ if it is good , display "your entry is valid" if not , display "please enter a v
 
 ### Solution:
 ```python
-_username = input("Enter your username: ")
-_pass = input("Enter your password: ")
+_zip_code=input("Enter your zip code: ")
 
-if _username == _pass == 'admin':
-  print("You have successfully login")
-else:
-  print("Username or password wrong")
+try:
+    # check if the entry is a number
+    _zip_code_cast=int(_zip_code)
+    if len(_zip_code) == 5 :
+        print("Your entry is valid")
+    else:
+        print("Please enter a valid entry")
+except ValueError:
+    print("ValueError !!! Please enter a number")
 ```
 
 ## Exercise 6:
