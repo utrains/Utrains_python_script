@@ -1,4 +1,4 @@
-## We have a script that we use to generate QR codes. It needs two inputs the message/URL and the file name for the QR code. Please look at how to use the argparser module to set it in a way that we can run it with arguments and provide those inputs. -h or --help should show how to use the script, -u or --url should be used to provide a URL and -i or --im should be used to provide the fileimage name.
+## We have a script that we use to generate QR codes. It needs two inputs the message/URL and the file name for the QR code. Please look at how to use the argparser module to set it in a way that we can run it with arguments and provide those inputs. -h or --help should show how to use the script, -u or --url should be used to provide a URL and -i or --im should be used to provide the file image name.
 
 ### the script is below:
 
