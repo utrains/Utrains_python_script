@@ -1,4 +1,4 @@
-## Script modification tickets ( this script is used by your team to check end points but will throw an error when the url doesn't have http so we need to add an exception for that to avoid the code breaking when the url is not good.(example: google.com won't work but http://google.com will.)
+## Script modification tickets ( this script is used by your team to check endpoints but will throw an error when the URL doesn't have HTTP so we need to add an exception for that to avoid code-breaking when the URL is not good. (For example, google.com won't work but http://google.com will.)
 
 ### The script is below:
 
