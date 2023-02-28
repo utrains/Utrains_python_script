@@ -1,6 +1,6 @@
 ## Lists are just like the arrays, declared in other languages which is a ordered collection of data.
 
-### Let's create some lists variables and display their content
+### Let's create some lists and display their content
 
 ``` python
 # create a list with same type of data 
