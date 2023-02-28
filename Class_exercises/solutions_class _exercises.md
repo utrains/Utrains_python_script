@@ -78,7 +78,7 @@ try:
     else:
         print("Please enter a valid entry")
 except ValueError:
-    print("ValueError !!! Please enter a number")
+    print("ValueError !!! Please enter a zip code")
 ```
 
 ## Exercise 6:
