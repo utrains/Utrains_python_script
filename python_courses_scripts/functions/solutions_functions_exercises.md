@@ -48,11 +48,12 @@ def my_function3(*kids):
 def max_two( x, y ):
   if x > y:
       return x
-  return y
+  else
+      return y
 ```
 6. Write a Python function called max_three based on max_two function that return the maximum of three numbers.
 
 ``` python
-def max_three( x, y, z ):
+def max_three(x, y, z):
     return max_of_two( x, max_two( y, z ) )
 ```
