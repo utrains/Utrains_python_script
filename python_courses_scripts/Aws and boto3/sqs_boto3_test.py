@@ -23,6 +23,9 @@ def get_queue_url():
         QueueName="my-new-queue",
     )
     return response["QueueUrl"]
+
+#get_queue_url()
+
 # send a message to the SQS queue
 
 def send_message():
@@ -35,6 +38,7 @@ def send_message():
     )
     print(response)
 #send_message()
+
 # receive a message from a sqs queue
 def receive_message():
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
