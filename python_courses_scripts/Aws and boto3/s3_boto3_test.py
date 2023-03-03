@@ -2,7 +2,7 @@ import boto3
 
 # Interacting with Boto3 and Amazon Simple Storage Service (S3)
 
-# create Amazon s3 buckets with and withut region name
+# create Amazon s3 buckets with region name
 
 def create_bucket(bucket_name, region):
     s3_client = boto3.client('s3', region_name=region)
