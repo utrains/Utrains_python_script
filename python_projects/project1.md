@@ -6,7 +6,6 @@
 #Program to fetch the http status code give the url/api
 from urllib.request import urlopen
 from urllib.error import URLError, HTTPError
-import emoji
 
 #Taking input url from user
 requestURL = input("Enter the URL: ")
