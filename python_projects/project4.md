@@ -10,9 +10,7 @@ import sys
 import subprocess
 from optparse import OptionParser
 from datetime import datetime
-
 import boto3
-from boto3.s3 import Key
 
 
 DB_USER = 'databaseuser'
@@ -29,6 +27,9 @@ AWS_BUCKET_NAME = 'myapp-db-backups'
 
 
 def main():
+    """ 
+     The script takes an argument: ‘hourly’ or ‘daily’
+    """
     parser = OptionParser()
     parser.add_option('-t', '--type', dest='backup_type',
                       help="Specify either 'hourly' or 'daily'.")
@@ -50,11 +51,11 @@ def main():
     destination = r'%s/%s' % (BACKUP_PATH, filename)
 
     print (f'Backing up {DB_NAME} database to {destination}')
-    ps = subprocess.Popen(
+    ps = subprocess.Popen(  # Execute a child program in a new process
         ['pg_dump', '-U', DB_USER, '-Fc', DB_NAME, '-f', destination],
         stdout=subprocess.PIPE
     )
-    output = ps.communicate()[0]
+    output = ps.communicate()[0] # communicate() returns a tuple (stdout_data, stderr_data)
     for line in output.splitlines():
         
         print(line)
@@ -67,14 +68,14 @@ def upload_to_s3(source_path, destination_filename):
     """
     Upload a file to an AWS S3 bucket.
     """
-    conn = boto3.connect_s3(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-    bucket = conn.get_bucket(AWS_BUCKET_NAME)
-    k = Key(bucket)
-    k.key = destination_filename
-    k.set_contents_from_filename(source_path)
+    s3_client = boto3.client('s3')
+
+    s3_client.upload_file(
+        Filename=source_path,
+        Bucket=AWS_BUCKET_NAME,
+        Key=destination_filename
+    )
 
 
 if __name__ == '__main__':
     main()
-    
-```
