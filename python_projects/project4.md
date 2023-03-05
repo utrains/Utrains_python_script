@@ -1,4 +1,4 @@
-## At work, we have an internal application running on PostgreSQL, and we need a python script that will take a backup of the database and upload it in s3 bucket every day at a certain time.
+## At work, we have an internal application running on PostgreSQL, and we need a python script that will take a backup of the database and upload it in s3 bucket hourly or daily.
 
 ### The script is below:
 
