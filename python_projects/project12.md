@@ -2,6 +2,8 @@
 
 ## Write a script that can automate AWS EBS snapshots and notify the admin via email.
 
+### Note: This script needs to be executed twice: the first you will confirm the subscription email, and the second time to send the notification.
+
 ```python
 import boto3
 
