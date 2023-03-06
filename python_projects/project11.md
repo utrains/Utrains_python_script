@@ -1,4 +1,6 @@
-## Write a script that will check if all AWS users have been created correctly as far as password, MFA set up and tag. Then, delete uncorrect users and notify the security team by email. This script should run every day for security purposes.
+## Write a script that will check if all AWS users have been created correctly as far as password, MFA set up and tag. Then, delete incorrect users and notify the security team by email. This script should run every day for security purposes.
+
+## Attach policies for IAM and SES to the role of your lambda function in AWS.
 
 ## The script is below:
 
@@ -9,11 +11,11 @@ import schedule
 import time
 
 _iam = boto3.client('iam')
-_uncorrect_users=[]
+_incorrect_users=[]
 
 def lambda_handler(event, context):
-    def list_uncorrect_users():
-        """ fucntion to get the list of uncorrect users """
+    def list_incorrect_users():
+        """ fucntion to get the list of incorrect users """
         _iam_users = []
         users = _iam.list_users()
         # get all iam user names
@@ -32,18 +34,18 @@ def lambda_handler(event, context):
             except ClientError as e:
                 if (len(mfa['MFADevices'])==0) and (len(tags_list)==0):
                     # get users with no passwork, mfa and tags
-                    _uncorrect_users.append(user)
-        return _uncorrect_users
+                    _incorrect_users.append(user)
+        return _incorrect_users
 
-    uncorrect_users_list = list_uncorrect_users()
+    incorrect_users_list = list_incorrect_users()
     users_deleted=[]
     def send_mail(list):
-        """ function to send the list of uncorrect users to the security team """
+        """ function to send the list of incorrect users to the security team """
         # set a verified email address of security team 
         RECIPIENT = ["<SET A VERIFIED EMAIL OF SECURITY TEAM>"]
         # set your verified sender email address
         SENDER = "<SET A VERIFIED EMAIL OF SENDER>"
-        SUBJECT = "Deletion of Uncorrect users"
+        SUBJECT = "Deletion of incorrect users"
         BODY_TEXT = (f"""
         Hello Security team, 
         This mail is to you notify that, the users in the list below have been deleted because they
@@ -222,11 +224,10 @@ def lambda_handler(event, context):
         except ClientError as e:
             print(e)
 
-    # delete uncorrect users
-    for user in uncorrect_users_list:
+    # delete incorrect users
+    for user in incorrect_users_list:
         delete_user_items(user)
         _iam.delete_user(UserName=user)
         users_deleted.append(user)
-        send_mail(users_deleted)
-```
+        send_mail(users_deleted)```
 
