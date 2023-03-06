@@ -32,8 +32,8 @@ topic_arn=topic['TopicArn']
 # email need to be manually confirmed first
 
 protocol='email'
-#email='estephe.kana@utrains.org'
-email='kanaestephe@gmail.com'
+email='<SET YOUR ADMIN EMAIL HERE>'
+
 email_sub= sns_client.subscribe(
     TopicArn=topic_arn,
     Protocol=protocol, 
@@ -43,15 +43,15 @@ email_sub= sns_client.subscribe(
 
 # publish a message to a topic via email
 
-message= f"""We sucessfully created snapshots of your available volumes. 
-Here is the list of their IDs: {snapshots}"""
-subject='EBS Snapshots'
-response= sns_client.publish(
-    TopicArn=topic_arn,
-    Message=message,
-    Subject=subject,
-)
-message_id=response['MessageId']
-print(f'Message published to topic {topic_arn} with message Id: {message_id}')
-
+if snapshots:
+	message= f"""We sucessfully created snapshots of your available volumes. 
+	Here is the list of their IDs: {snapshots}"""
+	subject='EBS Snapshots'
+	response= sns_client.publish(
+		TopicArn=topic_arn,
+		Message=message,
+		Subject=subject,
+	)
+	message_id=response['MessageId']
+	print(f'Message published to topic {topic_arn} with message Id: {message_id}')
 ```
