@@ -217,7 +217,7 @@ Write a script that can be used to transform xml file into csv or json format. (
 
 ### Solution
 
-The script below is used to convert XML to JSON format, and we wil use "test.xml" to test the code:
+The script below is used to convert XML to JSON format, and we wil use "test.xml" from the current directory to test the code:
 
 ```python
 # install json and xmltodict modules if you don't have it yet
