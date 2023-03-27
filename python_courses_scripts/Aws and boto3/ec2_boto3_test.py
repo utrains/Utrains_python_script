@@ -2,12 +2,12 @@ import boto3
 
 # Interacting with Boto3 and Amazon Elastic Compute Cloud (EC2)
 # create an EC2 key pair
-def create_key_pair():
+def create_key_pair(key_pair_name):
     ec2_client = boto3.client("ec2", region_name="us-east-1")
-    response = ec2_client.create_key_pair(KeyName="my-ec2-key-pair")   
+    response = ec2_client.create_key_pair(KeyName=key_pair_name)   
     print(response)
 
-#create_key_pair()
+#create_key_pair("key_pair_name")
 
 # create an EC2 instance
 def create_instance():
