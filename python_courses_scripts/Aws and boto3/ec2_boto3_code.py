@@ -7,7 +7,7 @@ def create_key_pair(key_pair_name):
     response = ec2_client.create_key_pair(KeyName=key_pair_name)   
     print(response)
 
-#create_key_pair("key_pair_name")
+#create_key_pair("my-ec2-key-pair")
 
 # create an EC2 instance
 def create_instance():
