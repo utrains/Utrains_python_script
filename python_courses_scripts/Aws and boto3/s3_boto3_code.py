@@ -11,7 +11,7 @@ def create_bucket(bucket_name, region):
                             CreateBucketConfiguration=location)
     print(response)
 
-#create_bucket("first-utrains-bucket","ca-central-1")
+#create_bucket("first-utrains-bucket","us-east-1")
 
 # Retrieve the list of existing buckets
 def list_buckets():
