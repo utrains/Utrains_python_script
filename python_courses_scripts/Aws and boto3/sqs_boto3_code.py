@@ -3,10 +3,10 @@ import json
 
 # Interacting with Boto3 and Amazon Simple Queue Services (SQS)
 # create a new SQS queue
-def create_queue():
+def create_queue(queue_name):
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
     response = sqs_client.create_queue(
-        QueueName="my-new-queue",
+        QueueName=queue_name,
         Attributes={
             "DelaySeconds": "5",
             "VisibilityTimeout": "60",
@@ -14,17 +14,17 @@ def create_queue():
     )
     print(response)
 
-#create_queue()
+#create_queue("my-new-queue")
 
 # get the url of the SQS queue
-def get_queue_url():
+def get_queue_url(queue_name):
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
     response = sqs_client.get_queue_url(
-        QueueName="my-new-queue",
+        QueueName=queue_name,
     )
     return response["QueueUrl"]
 
-#get_queue_url()
+#get_queue_url("my-new-queue")
 
 # send a message to the SQS queue
 
