@@ -28,22 +28,22 @@ def get_queue_url():
 
 # send a message to the SQS queue
 
-def send_message():
+def send_message(queue_url):
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
 
     message = {"key": "value"}
     response = sqs_client.send_message(
-        QueueUrl="https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue",
+        QueueUrl=queue_url,
         MessageBody=json.dumps(message)
     )
     print(response)
-#send_message()
+#send_message("https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue")
 
 # receive a message from a sqs queue
-def receive_message():
+def receive_message(queue_url):
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
     response = sqs_client.receive_message(
-        QueueUrl="https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue",
+        QueueUrl=queue_url,
         MaxNumberOfMessages=1,
         WaitTimeSeconds=10,
     )
@@ -54,39 +54,39 @@ def receive_message():
         print(f"Message body: {json.loads(message_body)}")
         print(f"Receipt Handle: {message['ReceiptHandle']}")
     return response
-#receive_message()
+#receive_message("https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue")
 
 # delete a message from the SQS queue
-def delete_message():
+def delete_message(queue_url):
     message= receive_message()["Messages"][0]
     receipt_handle= message['ReceiptHandle']
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
     response = sqs_client.delete_message(
-        QueueUrl="https://ca-central-1.queue.amazonaws.com/076892551558/estephe-new-queue",
+        QueueUrl=queue_url,
         ReceiptHandle=receipt_handle,
     )
     print(response)
-#delete_message()
+#delete_message("https://ca-central-1.queue.amazonaws.com/076892551558/estephe-new-queue")
 
 # change DelaySeconds and VisibilityTimeout attributes of my-new-queue
-def change_queue_attributes():
+def change_queue_attributes(queue_url):
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
     response = sqs_client.set_queue_attributes(
-        QueueUrl="https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue",
+        QueueUrl=queue_url,
         Attributes={
             "DelaySeconds": "10",
             "VisibilityTimeout": "300",
         }
     )
     print(response)
-#change_queue_attributes()
+#change_queue_attributes("https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue")
 
 # delete all messages from my-new-queue
-def purge_queue():
+def purge_queue(queue_url):
     sqs_client = boto3.client("sqs", region_name="ca-central-1")
     response = sqs_client.purge_queue(
-        QueueUrl="https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue",
+        QueueUrl=queue_url,
     )
     print(response)
-#purge_queue()
+#purge_queue("https://ca-central-1.queue.amazonaws.com/076892551558/my-new-queue")
 
