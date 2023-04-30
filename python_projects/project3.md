@@ -20,7 +20,7 @@ with open("test.xml") as xml_file:
 	# generate the object using json.dumps()
 	# corresponding to json data
 	
-	json_data = json.dumps(data_dict)
+	json_data = json.dumps(data_dict, indent=4)
 	
 	# Write the json data to output json file called output
 	with open("xml_converted.json", "w") as json_file:
