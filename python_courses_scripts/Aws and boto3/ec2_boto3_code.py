@@ -32,7 +32,7 @@ def get_public_ip(instance_id):
         for instance in reservation['Instances']:
             print(f'public IP adress: {instance.get("PublicIpAddress")}')
 
-#get_public_ip('i-0a20cf982109974f5')
+#get_public_ip('<ENTER YOUR INSTQNCE ID HERE>')
 
 # to list all running EC2 instances
 
@@ -61,7 +61,7 @@ def stop_instance(instance_id):
     response = ec2_client.stop_instances(InstanceIds=[instance_id])
     print(response)
 
-#stop_instance('i-0a20cf982109974f5')
+#stop_instance('<ENTER YOUR INSTQNCE ID HERE>')
 
 # terminate an EC2 instance
 def terminate_instance(instance_id):
@@ -69,4 +69,4 @@ def terminate_instance(instance_id):
     response = ec2_client.terminate_instances(InstanceIds=[instance_id])
     print(response)
 
-#terminate_instance('i-0a20cf982109974f5')
+#terminate_instance('<ENTER YOUR INSTQNCE ID HERE>')
