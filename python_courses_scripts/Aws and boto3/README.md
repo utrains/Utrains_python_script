@@ -9,9 +9,11 @@
 * **sqs_boto3_code.py**: this script contains the experiments made with Boto3 and Amazon Simple Queue Services (SQS).
 
 ## Install Boto3 module on Python
-Before using boto3, you have to install it. To do that, type the command:
 
 **Prerequisites: Install and configure awscli**
+
+Before using boto3, you have to install it. To do that, type the command:
+
 **pip install boto3** or **pip3 install boto3**
 
 
