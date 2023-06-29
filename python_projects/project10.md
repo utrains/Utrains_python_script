@@ -2,8 +2,6 @@
 
 ### Write a script that will check all users' access keys and deactivate the ones that are non-compliant. Also, this script should send a warning email to users to rotate their access keys after 85 days. All access keys should automatically be deactivated after 90 days, which can be associated with a Jenkins job to periodically check the users access keys.
 
-### Attach policies for IAM and SES to the role of your lambda function in AWS.
-
 ## The script is below:
 
 ``` python
