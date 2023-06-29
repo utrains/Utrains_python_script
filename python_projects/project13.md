@@ -11,7 +11,7 @@ url = "https://api.github.com"
 
 # Define the headers to include the authorization token
 headers = {
-    "Authorization": "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"
+    "Authorization": "<YOUR_AUTH_TOKEN>"
 }
 
 # Define a function to get a list of repositories for a user
@@ -56,12 +56,9 @@ def delete_repo(username, repo_name):
         print(f"Error deleting repository '{repo_name}'")
 
 # Test the functions
-repos = get_repos("Kanaestephe")
+repos = get_repos("<YOUR_USERNAME>")
 print(repos)
 
-#create_repo("Kanaestephe", "test-repo")
-#update_repo("Kanaestephe", "test-repo", "This is a test repository")
-#delete_repo("Kanaestephe", "test-repo")
-#get_repos("Kanaestephe")
+
 
 ```
