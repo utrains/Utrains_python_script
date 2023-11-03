@@ -77,4 +77,4 @@ for user in iam.list_users()['Users']: # check for all iam users
                 iam.update_access_key(UserName=keyValue['UserName'], AccessKeyId=keyValue['AccessKeyId'], Status='Inactive')
                 print(f"Access keys of {keyValue['UserName']} have been deleted")
             else:
-                pass```
+                print(f"Access keys of {keyValue['UserName']} have been rotated")
