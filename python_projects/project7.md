@@ -1,6 +1,6 @@
-## At work, part of the external audit showed that some of our S3 buckets are exposed and do not have encryption enabled and no bucket policy applied.
+## At work, part of the external audit showed that some of our S3 buckets are exposed and do not have encryption enabled and no bucket policy is applied.
 
-## Write a script that check all the S3 buckets and identifies which are not encrypted and have no bucket policy applied.
+## Write a script that checks all the S3 buckets and identifies which are not encrypted and have no bucket policy applied.
 
 ## The script is below:
 
