@@ -24,3 +24,5 @@ except URLError as e:
     #In case of bad URL or connection failure, prints Win Error
     print('Status :',  str(e.reason).split(']')[0].replace('[','') )
     print('Message : '+ str(e.reason).split(']')[1])
+except ValueError:
+    print("Malformed URL, please check again !!!")
