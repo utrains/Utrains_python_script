@@ -1,6 +1,6 @@
 ## For security purposes, all users must rotate their access key every 90 days.
 
-### Write a script that will check all users' access keys and deactivate the ones that are non-compliant. Also, this script should send a warning email to users to rotate their access keys after 85 days. All access keys should automatically be deactivated after 90 days, which can be associated with a Jenkins job to periodically check the users access keys.
+### Write a script that will check all users' access keys and deactivate the non-compliant ones. Also, this script should send a warning email to users to rotate their access keys after 85 days. All access keys should automatically be deactivated after 90 days, which can be associated with a Jenkins job to periodically check the users access keys.
 
 ## The script is below:
 
@@ -11,6 +11,7 @@ from botocore.exceptions import ClientError
 
 iam = boto3.client('iam')
 
+AWS_REGION= "us-east-1"
 def send_mail(email_list):
     # emails in email_list must be verified by AWS SES
     RECIPIENTS = email_list
@@ -23,6 +24,18 @@ def send_mail(email_list):
     # set your AWS REGION
     AWS_REGION="<AWS_REGION>"
     ses_client = boto3.client('ses', region_name=AWS_REGION)
+    # verify if the configuration set is created, if not then create it
+    try:
+        response = ses_client.create_configuration_set(
+            ConfigurationSet={
+                'Name': 'my-config-set'
+            }
+        )   
+    except Exception as e:
+        print('Configuration set exists:' + e.response['Error']['Message'])
+    else:
+        print(f'Configuration set creation error !!! Please check your configuration set')
+    # send email
     try:
         response = ses_client.send_email(
             Destination={
@@ -41,6 +54,7 @@ def send_mail(email_list):
                 },
             },
             Source=SENDER,
+            ConfigurationSetName='my-config-set',
         )
     except ClientError as e:
         print(e.response['Error']['Message'])
