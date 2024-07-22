@@ -98,19 +98,32 @@ def lambda_handler(event, context):
     fixed_policy_buckets= get_NoPolicyFixed_buckets()
     buckets_fixed=list(set(encrypted_buckets+fixed_policy_buckets))
 
-    def send_mail():
+    # send the email to security team
+    def send_mail(): 
         # set a verified email address of security team
         RECIPIENT = ["<SET A VERIFIED EMAIL OF SECURITY TEAM>"]
         # set your verified sender email address
         SENDER = "<SET A VERIFIED SENDER EMAIL>"
-        SUBJECT = "Encryption and Policy fixed on S3 buckets"
-        BODY_TEXT = (f"""
-        Hello Security team, 
-        This mail is to you notify that, we have applied encryption and policy on all the buckets 
-        in the list below: 
-        {buckets_fixed}""")           
-        CHARSET = "UTF-8"
         ses_client = boto3.client('ses')
+        SUBJECT = "List of buckets that have public access "
+        BODY_TEXT = (f"""
+        Hello Team,           
+        Find below vulnerable S3 bucket(s):
+        Bucket_name: {buckets_fixed}
+        Thanks and regards 
+        """)           
+        CHARSET = "UTF-8"
+        
+        try:
+            response = ses_client.create_configuration_set(
+                ConfigurationSet={
+                    'Name': 'my-config-set'
+                }
+            )   
+        except Exception as e:
+            print('Configuration set exists:' + e.response['Error']['Message'])
+        else:
+            print(f'Configuration set creation error !!! Please check your configuration set')
         try:
             response = ses_client.send_email(
                 Destination={
@@ -129,12 +142,18 @@ def lambda_handler(event, context):
                     },
                 },
                 Source=SENDER,
+                ConfigurationSetName='my-config-set',
             )
         except ClientError as e:
             print(e.response['Error']['Message'])
         else:
-            print(f"Email sent! Message ID: {response['MessageId']}")
+            print(f"Email successfully sent! Message ID: {response['MessageId']}")
             
+    # send mail if buckets_fixed is not empty
+    if buckets_fixed:
+        send_mail()
+    else:
+        print("All the Buckets are good !!!")    
     # send mail if buckets_fixed is not empty
     if buckets_fixed:
         send_mail()
