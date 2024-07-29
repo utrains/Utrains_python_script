@@ -4,7 +4,7 @@
 ### The script below is made based on the geolocation app project of Utrains' Class
 
 ```python
-# Prerequisite: install selenium module
+# Prerequisite: install selenium library
 
 from selenium import webdriver
 import time
