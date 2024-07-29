@@ -6,54 +6,72 @@
 
 ```python
 import boto3
+from botocore.exceptions import NoCredentialsError, PartialCredentialsError
+from datetime import datetime
 
-ec2_resource = boto3.resource('ec2')
+def create_snapshots_and_notify():
 
-filter_vol= [
-    {
-        'Name':'status', 
-        'Values': ['available']
-    }
-]
-snapshots=[]
+    AWS_REGION = 'us-esat-1'
+    ec2_client = boto3.client('ec2', region_name=AWS_REGION)
 
-# Create snapshots for available volumes
-for volume in ec2_resource.volumes.filter(Filters=filter_vol):
-    snapshot=volume.create_snapshot(Description='Snapshot created via script')
-    snapshots.append(snapshot.snapshot_id)
-    print(f"Snapshot created successfully for volume {volume.id}")
+    snapshots = []
 
-# Create a notification topic
-AWS_REGION='us-east-1'
-topic_name='EBS-Snapshot-notification'
-sns_client = boto3.client("sns", region_name=AWS_REGION)
-topic = sns_client.create_topic(Name=topic_name)
-topic_arn=topic['TopicArn']
+    try:
+        # Create snapshots for available volumes
+        response = ec2_client.describe_volumes()
+        for volume in response['Volumes']:
+            volume_id = volume['VolumeId']
+            description = f'Snapshot of {volume_id} on {datetime.now().strftime("%d/%m/%Y %H:%M:%S")}'
+            
+            snapshot = ec2_client.create_snapshot(VolumeId=volume_id, Description=description)
+            snapshots.append(snapshot['SnapshotId'])
+            print(f"Snapshot created successfully for volume {volume_id}")
+            
 
-# Subscribe an email to the topic
-# email need to be manually confirmed first
+        # Create a notification topic
+        topic_name = 'EBS-Snapshot-notification'
+        sns_client = boto3.client("sns", region_name=AWS_REGION)
+        topic = sns_client.create_topic(Name=topic_name)
+        topic_arn = topic['TopicArn']
 
-protocol='email'
-email='<SET YOUR ADMIN EMAIL HERE>'
+        # Subscribe an email to the topic
+        # Email needs to be manually confirmed first
+        protocol = 'email'
+        email = '<SET YOUR ADMIN EMAIL HERE>'
 
-email_sub= sns_client.subscribe(
-    TopicArn=topic_arn,
-    Protocol=protocol, 
-    Endpoint=email, 
-    ReturnSubscriptionArn=True
-)
+        # Check if the subscription already exists
+        subscriptions = sns_client.list_subscriptions_by_topic(TopicArn=topic_arn)['Subscriptions']
+        email_exists = any(sub['Endpoint'] == email for sub in subscriptions)
 
-# publish a message to a topic via email
+        if not email_exists:
+            sns_client.subscribe(
+                TopicArn=topic_arn,
+                Protocol=protocol,
+                Endpoint=email,
+                ReturnSubscriptionArn=True
+            )
 
-if snapshots:
-	message= f"""We sucessfully created snapshots of your available volumes. 
-	Here is the list of their IDs: {snapshots}"""
-	subject='EBS Snapshots'
-	response= sns_client.publish(
-		TopicArn=topic_arn,
-		Message=message,
-		Subject=subject,
-	)
-	message_id=response['MessageId']
-	print(f'Message published to topic {topic_arn} with message Id: {message_id}')
+        # Publish a message to the topic via email
+        if snapshots:
+            message = f"""We successfully created snapshots of your available volumes.
+            Here is the list of their IDs: {', '.join(snapshots)}"""
+            subject = 'EBS Snapshots'
+            response = sns_client.publish(
+                TopicArn=topic_arn,
+                Message=message,
+                Subject=subject,
+            )
+            message_id = response['MessageId']
+            print(f'Message published to topic {topic_arn} with message ID: {message_id}')
+        else:
+            print('No snapshots were created.')
+
+    except (NoCredentialsError, PartialCredentialsError):
+        print("Error: AWS credentials not found or incomplete.")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+
+if __name__ == "__main__":
+    create_snapshots_and_notify()
+
 ```
