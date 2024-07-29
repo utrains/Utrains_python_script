@@ -4,7 +4,7 @@
 ### The script below is made based on the geolocation app project of Utrains' Class
 
 ```python
-# Prerequisite: install selenium library
+# Prerequisite: install selenium module
 
 from selenium import webdriver
 import time
@@ -21,7 +21,7 @@ driver.maximize_window()
 driver.delete_all_cookies()
 
 #navigate to the URL  
-driver.get("http://45.33.11.12:8082/showMyLoginPage")
+driver.get("http://96.126.113.215:8082/showMyLoginPage")
 
 # get the browser's title
 title1= driver.title # title of the login page
