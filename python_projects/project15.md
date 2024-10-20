@@ -1,10 +1,10 @@
-# To maintain a secure and well-organized AWS environment, we need to develop a Python script to automate the cleanup of IAM roles in our AWS environment. The goal is to identify and delete IAM roles that are older than a specified threshold (100 days) using the Boto3 library. This automation will help maintain a secure, efficient, and organized AWS account by regularly removing outdated or unused roles.
+## To maintain a secure and well-organized AWS environment, we need to develop a Python script to automate the cleanup of IAM roles in our AWS environment. The goal is to identify and delete IAM roles that are older than a specified threshold (100 days) using the Boto3 library. This automation will help maintain a secure, efficient, and organized AWS account by regularly removing outdated or unused roles.
 
 ## The script should:
 
-### 1. Retrieve all IAM roles in the AWS account.
-### 2. Determine the age of each role based on its creation date.
-### 3. Delete roles that are older than the configured threshold (100 days).
+#### 1. Retrieve all IAM roles in the AWS account.
+#### 2. Determine the age of each role based on its creation date.
+#### 3. Delete roles that are older than the configured threshold (100 days).
 
 
 ### The proposed solution is below:
